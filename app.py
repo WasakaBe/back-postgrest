@@ -222,4 +222,6 @@ app.register_blueprint(feedback_bp,url_prefix='/api')
 
 app.register_blueprint(wear_bp)
 if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=50033)
+    # Render necesita que la aplicación escuche en el puerto especificado por la variable de entorno PORT
+    port = int(os.environ.get('PORT', 5000))
+    serve(app, host='0.0.0.0', port=port)
