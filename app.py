@@ -8,6 +8,7 @@ from waitress import serve
 from dotenv import load_dotenv
 from Database.Database import db , PushSubscription
 from pywebpush import webpush, WebPushException
+from flask_migrate import Migrate
 
 # Importa y registra los blueprints después de inicializar db
 from Routes.Web.TBL_TIPO_ROL.tipo_rol_routes import tipo_rol_bp
@@ -80,7 +81,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
 db.init_app(app)
-
+migrate = Migrate(app, db)
 # Manejo de errores
 @app.errorhandler(Exception)
 def handle_error(e):
